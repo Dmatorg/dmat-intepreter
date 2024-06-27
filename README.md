@@ -31,7 +31,7 @@
 <ol>
     <li>Download the source code as a ZIP file:</li>
     <ul>
-        <li>Go to the repository page: <a href="https://github.com/dmatorg/dmat">https://github.com/dmatorg/dmat</a></li>
+        <li>Go to the repository page: <a href="https://github.com/Dmatorg/dmat-intepreter/tree/main">https://github.com/Dmatorg/dmat-intepreter/tree/main</a></li>
         <li>Click on the "Code" button and select "Download ZIP".</li>
     </ul>
     <li>Extract the ZIP file:</li>
