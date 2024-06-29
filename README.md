@@ -69,6 +69,12 @@ DMAT_METALICS: metallic_map.png
 EXIT&BUILD
 </code></pre>
 
+<hr>
+
+<h2>DMAT Language tutorial</h2>
+<p>DMAT Lang is to powerfull for designing PBR from Albedo and for doing this you need to be family with DMAT Lang Syntax!</p>
+
+
 <h2>Contributing</h2>
 <p>Contributions are welcome! Please feel free to submit a pull request or open an issue.</p>
 
