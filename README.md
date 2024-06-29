@@ -87,7 +87,7 @@ EXIT&BUILD
     <li><b>DMAT_INTENSITY:</b> (Used to define the Intensity of the S params, In simple language this will set the pixel intensity of the maps which can range from 0 to 255, 0 means highly pixalated also known as FOZ DTX HYPER NORMALS but these can look soo ugly due to pixel density and whien screen profile, 255 means so soft and contains the common normal map pixel informations which are widely used but this totay depnds on the albedo color pixels to be intensied, intensity will affect all the maps, 0 will bring it highly pixelated with strong colors and 255 will make more visible pixels and common color profile any number between 0 to 255 can be setted as intensity</li><br>
 </ul>
 
-<code>Note: DMAT is case and indentation sensitive means Upper case must be Upper case and Lower case must be lower case and don't add spaces between params like "DMAT_ALBEDO: a.png" dmat will count the space between : and a.png as file name and it will return correct way is "DMAT_ALBEDO:a.png"</b></code>
+<pre><code>Note: DMAT is case and indentation sensitive means Upper case must be Upper case and Lower case must be lower case and don't add spaces between params like "DMAT_ALBEDO: a.png" dmat will count the space between : and a.png as file name and it will return correct way is "DMAT_ALBEDO:a.png"</b></code></pre>
 
 
 <h2>Contributing</h2>
