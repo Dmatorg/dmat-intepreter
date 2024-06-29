@@ -1,3 +1,13 @@
+/*
+ * DMAT Official Compiling File
+ * Written by ghgltggamer
+ *
+ * This library is licensed under the terms found in the LICENSE file.
+ */
+ 
+
+// DMAT Lang - version 1.0.1
+
 #include "dmat.h"
 #include <fstream>
 
@@ -6,6 +16,7 @@ std::string normalF;
 std::string heightF;
 std::string roughnessF;
 std::string metalicF;
+float intensity;
 
 int main(){
 	while (1){
@@ -67,8 +78,18 @@ int main(){
 				}
 				
 				
+				// Intensity addition
+				else if (txt.find("DMAT_INTENSITY:")!=-1){
+					std::string name = "DMAT_INTENSITY:";
+					std::string get = txt.substr(txt.find(name)+name.length());
+					std::cout<<"Compiling "<<get<<"...\n";
+					std::cout<<"Initalising Light Intensity...\n";
+					intensity = std::stoi(get);
+				}
+				
+				
 				else if (txt.find("EXIT&BUILD")!=-1){
-					DMAT_FINAL_PROCESS(albedoF, normalF, heightF, roughnessF, metalicF);
+					DMAT_FINAL_PROCESS(albedoF, normalF, heightF, roughnessF, metalicF, intensity);
 					std::cout<<"\nCompilation done\n";
 				}
 				

@@ -1,3 +1,15 @@
+/*
+ * DMAT Official Imaging Library
+ * Written by ghgltggamer
+ *
+ * This library is licensed under the terms found in the LICENSE file.
+ */
+
+// DMAT Lang version 1.0.1
+
+//#ifndef DMAT_MATERIAL_H
+//#define DMAT_MATERIAL_H
+
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 #define STB_IMAGE_WRITE_IMPLEMENTATION
@@ -12,7 +24,7 @@ float getIntensity(unsigned char r, unsigned char g, unsigned char b) {
 }
 
 // Function to create an improved normal map from the albedo image
-void createNormalMap(unsigned char* albedo, unsigned char* normalMap, int width, int height, int channels) {
+void createNormalMap(unsigned char* albedo, unsigned char* normalMap, int width, int height, int channels, float intensity) {
     for (int y = 1; y < height - 1; ++y) {
         for (int x = 1; x < width - 1; ++x) {
             int index = (y * width + x) * channels;
@@ -24,8 +36,7 @@ void createNormalMap(unsigned char* albedo, unsigned char* normalMap, int width,
 
             float dx = intensityR - intensityL;
             float dy = intensityD - intensityU;
-
-            float dz = 1.0f / 255.0f;
+            float dz = intensity / 255.0f;
 
             float length = sqrt(dx * dx + dy * dy + dz * dz);
             dx /= length;
@@ -40,7 +51,7 @@ void createNormalMap(unsigned char* albedo, unsigned char* normalMap, int width,
 }
 
 // Function to create a height map from the albedo image
-void createHeightMap(unsigned char* albedo, unsigned char* heightMap, int width, int height, int channels) {
+void createHeightMap(unsigned char* albedo, unsigned char* heightMap, int width, int height, int channels, float intensity) {
     for (int y = 0; y < height; ++y) {
         for (int x = 0; x < width; ++x) {
             int index = (y * width + x) * channels;
@@ -48,14 +59,14 @@ void createHeightMap(unsigned char* albedo, unsigned char* heightMap, int width,
             unsigned char g = albedo[index + 1];
             unsigned char b = albedo[index + 2];
 
-            float intensity = (r + g + b) / 3.0f;
-            heightMap[y * width + x] = static_cast<unsigned char>(intensity);
+            float pixelIntensity = (r + g + b) / 3.0f;
+            heightMap[y * width + x] = static_cast<unsigned char>(pixelIntensity * (intensity / 255.0f));
         }
     }
 }
 
 // Function to create a roughness map from the albedo image
-void createRoughnessMap(unsigned char* albedo, unsigned char* roughnessMap, int width, int height, int channels) {
+void createRoughnessMap(unsigned char* albedo, unsigned char* roughnessMap, int width, int height, int channels, float intensity) {
     for (int y = 0; y < height; ++y) {
         for (int x = 0; x < width; ++x) {
             int index = (y * width + x) * channels;
@@ -63,14 +74,14 @@ void createRoughnessMap(unsigned char* albedo, unsigned char* roughnessMap, int 
             unsigned char g = albedo[index + 1];
             unsigned char b = albedo[index + 2];
 
-            float intensity = (r + g + b) / 3.0f;
-            roughnessMap[y * width + x] = static_cast<unsigned char>(255 - intensity); // Invert for roughness
+            float pixelIntensity = (r + g + b) / 3.0f;
+            roughnessMap[y * width + x] = static_cast<unsigned char>((255 - pixelIntensity) * (intensity / 255.0f)); // Invert for roughness
         }
     }
 }
 
 // Function to create a metallic map from the albedo image
-void createMetallicMap(unsigned char* albedo, unsigned char* metallicMap, int width, int height, int channels) {
+void createMetallicMap(unsigned char* albedo, unsigned char* metallicMap, int width, int height, int channels, float intensity) {
     for (int y = 0; y < height; ++y) {
         for (int x = 0; x < width; ++x) {
             int index = (y * width + x) * channels;
@@ -78,14 +89,14 @@ void createMetallicMap(unsigned char* albedo, unsigned char* metallicMap, int wi
             unsigned char g = albedo[index + 1];
             unsigned char b = albedo[index + 2];
 
-            float intensity = (r + g + b) / 3.0f;
-            metallicMap[y * width + x] = static_cast<unsigned char>(intensity);
+            float pixelIntensity = (r + g + b) / 3.0f;
+            metallicMap[y * width + x] = static_cast<unsigned char>(pixelIntensity * (intensity / 255.0f));
         }
     }
 }
 
 // Function to convert an albedo image directly into a normal map
-void convertAlbedoToNormalMap(const std::string& inputFilePath, const std::string& outputFilePath) {
+void convertAlbedoToNormalMap(const std::string& inputFilePath, const std::string& outputFilePath, float intensity) {
     int width, height, channels;
     unsigned char* albedo = stbi_load(inputFilePath.c_str(), &width, &height, &channels, 0);
     if (!albedo) {
@@ -96,7 +107,7 @@ void convertAlbedoToNormalMap(const std::string& inputFilePath, const std::strin
     unsigned char* normalMap = new unsigned char[width * height * channels];
     memset(normalMap, 0, width * height * channels);
 
-    createNormalMap(albedo, normalMap, width, height, channels);
+    createNormalMap(albedo, normalMap, width, height, channels, intensity);
 
     stbi_write_png(outputFilePath.c_str(), width, height, channels, normalMap, width * channels);
 
@@ -107,7 +118,7 @@ void convertAlbedoToNormalMap(const std::string& inputFilePath, const std::strin
 }
 
 // Function to process an albedo image into all maps with specified filenames
-void DMAT_FINAL_PROCESS(const std::string& albedoImageName, const std::string& normalMapName, const std::string& heightMapName, const std::string& roughnessMapName, const std::string& metallicMapName) {
+void DMAT_FINAL_PROCESS(const std::string& albedoImageName, const std::string& normalMapName, const std::string& heightMapName, const std::string& roughnessMapName, const std::string& metallicMapName, float intensity) {
     int width, height, channels;
     unsigned char* albedo = stbi_load(albedoImageName.c_str(), &width, &height, &channels, 0);
     if (!albedo) {
@@ -125,10 +136,10 @@ void DMAT_FINAL_PROCESS(const std::string& albedoImageName, const std::string& n
     memset(roughnessMap, 0, width * height);
     memset(metallicMap, 0, width * height);
 
-    createNormalMap(albedo, normalMap, width, height, channels);
-    createHeightMap(albedo, heightMap, width, height, channels);
-    createRoughnessMap(albedo, roughnessMap, width, height, channels);
-    createMetallicMap(albedo, metallicMap, width, height, channels);
+    createNormalMap(albedo, normalMap, width, height, channels, intensity);
+    createHeightMap(albedo, heightMap, width, height, channels, intensity);
+    createRoughnessMap(albedo, roughnessMap, width, height, channels, intensity);
+    createMetallicMap(albedo, metallicMap, width, height, channels, intensity);
 
     stbi_write_png(normalMapName.c_str(), width, height, channels, normalMap, width * channels);
     stbi_write_png(heightMapName.c_str(), width, height, 1, heightMap, width);
@@ -144,18 +155,21 @@ void DMAT_FINAL_PROCESS(const std::string& albedoImageName, const std::string& n
     std::cout << "All maps generated and saved successfully." << std::endl;
 }
 
+//#endif // DMAT_MATERIAL_H
+
 /*int main() {
     std::string albedoImageName = "a.png";
     std::string normalMapName = "normal_map.png";
     std::string heightMapName = "height_map.png";
     std::string roughnessMapName = "roughness_map.png";
     std::string metallicMapName = "metallic_map.png";
+    float intensity = 128.0f;
 
-    DMAT_FINAL_PROCESS(albedoImageName, normalMapName, heightMapName, roughnessMapName, metallicMapName);
+    DMAT_FINAL_PROCESS(albedoImageName, normalMapName, heightMapName, roughnessMapName, metallicMapName, intensity);
 
     // Optionally, you can also convert albedo to normal map directly
     std::string directNormalMapName = "direct_normal_map.png";
-    convertAlbedoToNormalMap(albedoImageName, directNormalMapName);
+    convertAlbedoToNormalMap(albedoImageName, directNormalMapName, intensity);
 
     return 0;
 }*/
