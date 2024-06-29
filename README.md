@@ -69,6 +69,27 @@ DMAT_METALICS: metallic_map.png
 EXIT&BUILD
 </code></pre>
 
+<hr>
+
+<h2>DMAT Language tutorial</h2>
+<p>DMAT Lang is to powerfull for designing PBR from Albedo and for doing this you need to be family with DMAT Lang Syntax!</p>
+
+<h3>Syntax - Assignment Based</h3>
+<p>Assignment Based Syntax is the custom DMAT syntax where you need to assign some key values to DMAT in order to build your materials</p>
+
+<h3>Params</h3>
+<ul>
+    <li><b>DMAT_ALBEDO:</b> (Used to load the albedo image into the memory buffer, This image will be processed for making materials)</li><br>
+    <li><b>DMAT_NORMALS:</b> (Used to load the normal map file name into the memory buffer normal map will be created with the given file name</li><br>
+    <li><b>DMAT_HEIGHTS:</b> (Used to load the height map file name into the memory buffer height map will be created with the given file name</li><br>
+    <li><b>DMAT_ROUGHNESSS:</b> (Used to load the roughness map file name into the memory buffer roughness map will be created with the given file name</li><br>
+    <li><b>DMAT_METALICS:</b> (Used to load the metalic map file name into the memory buffer metalic map will be created with the given file name</li><br>
+    <li><b>DMAT_INTENSITY:</b> (Used to define the Intensity of the S params, In simple language this will set the pixel intensity of the maps which can range from 0 to 255, 0 means highly pixalated also known as FOZ DTX HYPER NORMALS but these can look soo ugly due to pixel density and whien screen profile, 255 means so soft and contains the common normal map pixel informations which are widely used but this totay depnds on the albedo color pixels to be intensied, intensity will affect all the maps, 0 will bring it highly pixelated with strong colors and 255 will make more visible pixels and common color profile any number between 0 to 255 can be setted as intensity</li><br>
+</ul>
+
+<pre><code>Note: DMAT is case and indentation sensitive means Upper case must be Upper case and Lower case must be lower case and don't add spaces between params like "DMAT_ALBEDO: a.png" dmat will count the space between : and a.png as file name and it will return correct way is "DMAT_ALBEDO:a.png"</b></code></pre>
+
+
 <h2>Contributing</h2>
 <p>Contributions are welcome! Please feel free to submit a pull request or open an issue.</p>
 
