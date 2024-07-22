@@ -1,51 +1,45 @@
-<h1>DMAT - Dextel Material (Dextile Material) Domain-Specific Language for Image Processing (Version 1.2)</h1>
+# DMAT - Dextel Material (Dextile Material) Domain-Specific Language for Image Processing (Version 1.2)
 
-    <p>DMAT is a Domain-Specific Language designed for image processing tasks such as generating normal maps, height maps, roughness maps, and metallic maps from an albedo image. This repository contains the source code for the DMAT interpreter and an example of how to use it.</p>
+DMAT is a Domain-Specific Language designed for image processing tasks such as generating normal maps, height maps, roughness maps, and metallic maps from an albedo image. This repository contains the source code for the DMAT interpreter and an example of how to use it.
 
-    <h2>Features</h2>
-    <ul>
-        <li>Generate normal maps from albedo images</li>
-        <li>Create height maps from albedo images</li>
-        <li>Create roughness maps from albedo images</li>
-        <li>Create metallic maps from albedo images</li>
-        <li>Set intensity of all different maps with a global variable ranging from 1 to 255</li>
-    </ul>
+## Features
+- Generate normal maps from albedo images
+- Create height maps from albedo images
+- Create roughness maps from albedo images
+- Create metallic maps from albedo images
+- Set intensity of all different maps with a global variable ranging from 1 to 255
 
-    <h2>Getting Started</h2>
+## Getting Started
 
-    <h3>Prerequisites</h3>
-    <p>Make sure you have the following dependencies installed if you plan to compile the source code:</p>
-    <ul>
-        <li>C++ compiler (g++ or clang++)</li>
-    </ul>
+### Prerequisites
+Make sure you have the following dependencies installed if you plan to compile the source code:
+- C++ compiler (g++ or clang++)
 
-    <h3>Installation</h3>
-    <p>You have two options to get started with DMAT:</p>
+### Installation
+You have two options to get started with DMAT:
 
-    <h4>Option 1: Download Precompiled Executable (Linux)</h4>
-    <ol>
-        <li>Download the precompiled executable from the project page:</li>
-        <pre><code>https://dmatorg.github.io/</code></pre>
-    </ol>
+#### Option 1: Download Precompiled Executable (Linux)
+1. Download the precompiled executable from the project page:https://dmatorg.github.io/
 
-    <h4>Option 2: Compile from Source</h4>
-    <ol>
-        <li>Download the source code as a ZIP file:</li>
-        <ul>
-            <li>Go to the repository page: <a href="https://github.com/Dmatorg/dmat-intepreter/tree/main">https://github.com/Dmatorg/dmat-intepreter/tree/main</a></li>
-            <li>Click on the "Code" button and select "Download ZIP".</li>
-        </ul>
-        <li>Extract the ZIP file:</li>
-        <pre><code>unzip dmat-main.zip</code></pre>
-        <li>Navigate to the extracted directory:</li>
-        <pre><code>cd dmat-main</code></pre>
-        <li>Compile the source code:</li>
-        <pre><code>g++ -o dmat_compiler dmat_compiler.cpp -std=c++11</code></pre>
-    </ol>
+#### Option 2: Compile from Source
+1. Download the source code as a ZIP file:
+    - Go to the repository page: [https://github.com/Dmatorg/dmat-intepreter/tree/main](https://github.com/Dmatorg/dmat-intepreter/tree/main)
+    - Click on the "Code" button and select "Download ZIP".
+2. Extract the ZIP file:
+    ```
+    unzip dmat-main.zip
+    ```
+3. Navigate to the extracted directory:
+    ```
+    cd dmat-main
+    ```
+4. Compile the source code:
+    ```
+    g++ -o dmat_compiler dmat_compiler.cpp -std=c++11
+    ```
 
-    <h3>Usage</h3>
-    <p>Create a .dmat file with the following format:</p>
-    <pre><code>
+### Usage
+Create a `.dmat` file with the following format:
 DMAT_ALBEDO: example_albedo.png
 DMAT_NORMALS: example_normal_map.png
 DMAT_HEIGHTS: example_height_map.png
@@ -56,58 +50,37 @@ IHEIGHT: 128
 IROUGHNESS: 128
 IMETALIC: 128
 EXIT&BUILD
-    </code></pre>
-    <p>Run the DMAT compiler:</p>
-    <pre><code>./dmat_compiler</code></pre>
-    <p>or if you downloaded the precompiled executable:</p>
-    <pre><code>./dmat_compiler.out</code></pre>
-    <p>Follow the prompts to enter the path to your .dmat file. The output images will be generated and saved with the specified filenames.</p>
 
-    <h2>Example</h2>
-    <p>Here is an example .dmat file:</p>
-    <pre><code>
-DMAT_ALBEDO: albedo.png
-DMAT_NORMALS: normal_map.png
-DMAT_HEIGHTS: height_map.png
-DMAT_ROUGHNESSS: roughness_map.png
-DMAT_METALICS: metallic_map.png
-INORMAL: 128
-IHEIGHT: 128
-IROUGHNESS: 128
-IMETALIC: 128
-EXIT&BUILD
-    </code></pre>
+Run the compiler: ./dmat example.dmat
 
-    <hr>
+---
 
-    <h2>DMAT Language Tutorial</h2>
-    <p>DMAT Lang is powerful for designing PBR from Albedo and for doing this you need to be familiar with DMAT Lang Syntax!</p>
+## DMAT Language Tutorial
+DMAT Lang is powerful for designing PBR from Albedo and for doing this you need to be familiar with DMAT Lang Syntax!
 
-    <h3>Syntax - Assignment Based</h3>
-    <p>Assignment Based Syntax is the custom DMAT syntax where you need to assign some key values to DMAT in order to build your materials</p>
+### Syntax - Assignment Based
+Assignment Based Syntax is the custom DMAT syntax where you need to assign some key values to DMAT in order to build your materials
 
-    <h3>Params</h3>
-    <ul>
-        <li><b>DMAT_ALBEDO:</b> (Used to load the albedo image into the memory buffer. This image will be processed for making materials)</li><br>
-        <li><b>DMAT_NORMALS:</b> (Used to load the normal map file name into the memory buffer. The normal map will be created with the given file name)</li><br>
-        <li><b>DMAT_HEIGHTS:</b> (Used to load the height map file name into the memory buffer. The height map will be created with the given file name)</li><br>
-        <li><b>DMAT_ROUGHNESSS:</b> (Used to load the roughness map file name into the memory buffer. The roughness map will be created with the given file name)</li><br>
-        <li><b>DMAT_METALICS:</b> (Used to load the metallic map file name into the memory buffer. The metallic map will be created with the given file name)</li><br>
-        <li><b>INORMAL:</b> (Used to define the intensity of the normal map. This sets the pixel intensity of the normal map, ranging from 1 to 255)</li><br>
-        <li><b>IHEIGHT:</b> (Used to define the intensity of the height map. This sets the pixel intensity of the height map, ranging from 1 to 255)</li><br>
-        <li><b>IROUGHNESS:</b> (Used to define the intensity of the roughness map. This sets the pixel intensity of the roughness map, ranging from 1 to 255)</li><br>
-        <li><b>IMETALIC:</b> (Used to define the intensity of the metallic map. This sets the pixel intensity of the metallic map, ranging from 1 to 255)</li><br>
-    </ul>
+### Params
+- **DMAT_ALBEDO:** (Used to load the albedo image into the memory buffer. This image will be processed for making materials)
+- **DMAT_NORMALS:** (Used to load the normal map file name into the memory buffer. The normal map will be created with the given file name)
+- **DMAT_HEIGHTS:** (Used to load the height map file name into the memory buffer. The height map will be created with the given file name)
+- **DMAT_ROUGHNESSS:** (Used to load the roughness map file name into the memory buffer. The roughness map will be created with the given file name)
+- **DMAT_METALICS:** (Used to load the metallic map file name into the memory buffer. The metallic map will be created with the given file name)
+- **INORMAL:** (Used to define the intensity of the normal map. This sets the pixel intensity of the normal map, ranging from 1 to 255)
+- **IHEIGHT:** (Used to define the intensity of the height map. This sets the pixel intensity of the height map, ranging from 1 to 255)
+- **IROUGHNESS:** (Used to define the intensity of the roughness map. This sets the pixel intensity of the roughness map, ranging from 1 to 255)
+- **IMETALIC:** (Used to define the intensity of the metallic map. This sets the pixel intensity of the metallic map, ranging from 1 to 255)
 
-    <pre><code>Note: DMAT is case and indentation sensitive, meaning Upper case must be Upper case and Lower case must be lower case. Don't add spaces between params like "DMAT_ALBEDO: a.png". DMAT will count the space between : and a.png as file name and it will return. The correct way is "DMAT_ALBEDO:a.png"</code></pre>
+Note: DMAT is case and indentation sensitive, meaning Upper case must be Upper case and Lower case must be lower case. Don't add spaces between params like "DMAT_ALBEDO: a.png". DMAT will count the space between : and a.png as file name and it will return. The correct way is "DMAT_ALBEDO:a.png"
 
-    <h2>Contributing</h2>
-    <p>Contributions are welcome! Please feel free to submit a pull request or open an issue.</p>
+## Contributing
+Contributions are welcome! Please feel free to submit a pull request or open an issue.
 
-    <h2>License</h2>
-    <p>This project is licensed under the MIT License.</p>
+## License
+This project is licensed under the MIT License.
 
-    <h2>Contact</h2>
-    <p>For any questions or inquiries, please contact <a href="mailto:dmatorg@gmail.com">dmatorg@gmail.com</a>.</p>
+## Contact
+For any questions or inquiries, please contact [dmatorg@gmail.com](mailto:dmatorg@gmail.com).
 
-    <p>Visit the project page: <a href="https://dmatorg.github.io/">dmatorg.github.io</a></p>
+Visit the project page: [dmatorg.github.io](https://dmatorg.github.io/)
