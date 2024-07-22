@@ -39,17 +39,17 @@ You have two options to get started with DMAT:
     ```
 
 ### Usage
-Create a `.dmat` file with the following format:
-DMAT_ALBEDO: example_albedo.png
-DMAT_NORMALS: example_normal_map.png
-DMAT_HEIGHTS: example_height_map.png
-DMAT_ROUGHNESSS: example_roughness_map.png
-DMAT_METALICS: example_metallic_map.png
-INORMAL: 128
-IHEIGHT: 128
-IROUGHNESS: 128
-IMETALIC: 128
-EXIT&BUILD
+Create a `.dmat` file with the following format: <br>
+DMAT_ALBEDO: example_albedo.png<br>
+DMAT_NORMALS: example_normal_map.png<br>
+DMAT_HEIGHTS: example_height_map.png<br>
+DMAT_ROUGHNESSS: example_roughness_map.png<br>
+DMAT_METALICS: example_metallic_map.png<br>
+INORMAL: 128<br>
+IHEIGHT: 128<br>
+IROUGHNESS: 128<br>
+IMETALIC: 128<br>
+EXIT&BUILD<br>
 
 Run the compiler: ./dmat example.dmat
 
