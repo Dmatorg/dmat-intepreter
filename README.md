@@ -23,7 +23,7 @@ You have two options to get started with DMAT:
 
 #### Option 2: Compile from Source
 1. Download the source code as a ZIP file:
-    - Go to the repository page: [https://github.com/Dmatorg/dmat-intepreter/tree/main](https://github.com/Dmatorg/dmat-intepreter/tree/main)
+    - Go to the repository page: [[https://github.com/Dmatorg/dmat-intepreter/tree/main](https://github.com/Dmatorg/dmat-intepreter/tree/v1.2)](https://github.com/Dmatorg/dmat-intepreter/tree/v1.2)](https://github.com/Dmatorg/dmat-intepreter/tree/main)
     - Click on the "Code" button and select "Download ZIP".
 2. Extract the ZIP file:
     ```
